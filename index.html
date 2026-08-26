@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five Types of Creativity Assessment</title>
+    <style>
+        /* --- Import Font --- */
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
+
+        /* --- Global Styles --- */
+        :root {
+            --primary-color: #D32F2F; /* Theme Red */
+            --secondary-color: #757575; /* Theme Grey */
+            --background-color: #f0f4f8; /* Light grayish blue background */
+            --container-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+
+            /* Chart Colors (Red & Grey Theme) */
+            --color-divergent: #D32F2F; /* Red */
+            --color-lateral: #757575; /* Grey */
+            --color-aesthetic: #E57373; /* Light Red */
+            --color-systematic: #BDBDBD; /* Light Grey */
+            --color-inspirational: #B71C1C; /* Dark Red */
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1, h2, h3, p, label, button, a, div {
+             font-family: 'Kanit', sans-serif;
+        }
+
+        .main-container {
+            background-color: var(--container-bg);
+            padding: 50px 60px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 750px;
+        }
+
+        /* --- Cover Page Styles --- */
+        #cover-page {
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+            padding: 25px 0;
+            margin-top: 10px;
+        }
+        
+        .intro-text {
+            font-size: 1em;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            text-align: left;
+            color: #444;
+        }
+        
+        .intro-text p {
+            margin-bottom: 20px;
+        }
+
+        .start-button {
+            display: inline-block;
+            padding: 12px 45px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: white;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.25);
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            background-color: #B71C1C;
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35);
+        }
+
+        /* --- Quiz Styles --- */
+        #quiz-page {
+            display: none; 
+        }
+        
+        #quiz-page h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        
+        #quiz-page .instructions {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1em;
+            color: var(--secondary-color);
+        }
+
+        .quiz-page-view { display: none; }
+        .quiz-page-view.active { display: block; animation: fadeIn 0.4s ease; }
+        
+        .question-block {
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+        }
+
+        .question-block h3 {
+            margin: 0 0 20px 0;
+            font-weight: 600;
+            font-size: 1.2em;
+            line-height: 1.5;
+            color: #222;
+        }
+
+        .option {
+            display: block;
+            margin-bottom: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .option input[type="radio"] { display: none; }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease-in-out;
+            background-color: #fafafa;
+            color: #444;
+        }
+        
+        .option label:hover {
+             border-color: #bdbdbd;
+             background-color: #f5f5f5;
+        }
+
+        .option input[type="radio"]:checked + label {
+            background-color: #ffebee; 
+            border-color: var(--primary-color);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 25px;
+        }
+
+        .nav-btn {
+            padding: 10px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #prev-btn { background-color: var(--secondary-color); }
+        #next-btn, #submit-btn { background: var(--primary-color); }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        #validation-message {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        /* --- Results Styles --- */
+        #results-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        #results-container h2 {
+             color: var(--primary-color);
+             margin-bottom: 30px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 300px;
+            border-left: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .chart-bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .bar-score {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .chart-bar {
+            width: 70%;
+            border-radius: 5px 5px 0 0;
+            height: 0;
+            transition: height 1s ease-out;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bar-percentage {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out 0.8s;
+        }
+        
+        #bar-divergent { background-color: var(--color-divergent); }
+        #bar-lateral { background-color: var(--color-lateral); }
+        #bar-aesthetic { background-color: var(--color-aesthetic); }
+        #bar-systematic { background-color: var(--color-systematic); }
+        #bar-inspirational { background-color: var(--color-inspirational); }
+
+        .bar-label { margin-top: 10px; font-weight: 600; font-size: 0.9em; }
+        #results-container.show-results .bar-percentage { opacity: 1; }
+
+        /* --- Responsive Fix --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                align-items: flex-start;
+            }
+            .main-container {
+                padding: 30px 20px;
+            }
+            .subtitle {
+                font-size: 1.6em;
+                padding: 15px 0;
+            }
+            #quiz-page h1 {
+                font-size: 1.5em;
+            }
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.95em;
+            }
+            .question-block {
+                padding-left: 15px;
+            }
+            .bar-label {
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- =========== COVER PAGE =========== -->
+        <div id="cover-page">
+            <h2 class="subtitle">Five Types of Creativity</h2>
+
+            <div class="intro-text">
+                <p>ยินดีต้อนรับสู่กิจกรรมการสำรวจความคิดสร้างสรรค์</p>
+                <p>แบบทดสอบนี้ถูกออกแบบขึ้นเพื่อให้ท่านได้ค้นพบแนวโน้มทางความคิดสร้างสรรค์ที่เป็นธรรมชาติของตนเองโดยอ้างอิงจาก 5 แนวคิดหลัก ได้แก่ <strong>Divergent, Lateral, Systematic, Aesthetic</strong> และ <strong>Inspirational Thinking</strong></p>
+                <p>ไม่มีคำตอบที่ "ถูก" หรือ "ผิด" โปรดเลือกคำตอบที่สะท้อนตัวตนของคุณในความคิดแรกของคุณมากที่สุด</p>
+            </div>
+
+            <button type="button" class="start-button" id="start-quiz-btn">เริ่มทำการทดสอบ</button>
+        </div>
+
+        <!-- =========== QUIZ PAGE =========== -->
+        <div id="quiz-page">
+            <h1>Five Types of Creativity</h1>
+            <p class="instructions">เลือกคำตอบที่สะท้อนความเป็นคุณมากที่สุด</p>
+            
+            <form id="quiz-form"></form>
+    
+            <div id="results-container">
+                <h2>ผลการประเมินของคุณ</h2>
+                <div class="chart-container">
+                     <div class="chart-bar-wrapper">
+                        <div class="bar-score" id="score-divergent">0</div>
+                        <div class="chart-bar" id="bar-divergent"><span class="bar-percentage" id="percent-divergent"></span></div>
+                        <div class="bar-label">Divergent</div>
+                    </div>
+                     <div class="chart-bar-wrapper">
+                        <div class="bar-score" id="score-lateral">0</div>
+                        <div class="chart-bar" id="bar-lateral"><span class="bar-percentage" id="percent-lateral"></span></div>
+                        <div class="bar-label">Lateral</div>
+                    </div>
+                     <div class="chart-bar-wrapper">
+                         <div class="bar-score" id="score-aesthetic">0</div>
+                        <div class="chart-bar" id="bar-aesthetic"><span class="bar-percentage" id="percent-aesthetic"></span></div>
+                        <div class="bar-label">Aesthetic</div>
+                    </div>
+                     <div class="chart-bar-wrapper">
+                         <div class="bar-score" id="score-systematic">0</div>
+                        <div class="chart-bar" id="bar-systematic"><span class="bar-percentage" id="percent-systematic"></span></div>
+                        <div class="bar-label">Systematic</div>
+                    </div>
+                     <div class="chart-bar-wrapper">
+                         <div class="bar-score" id="score-inspirational">0</div>
+                        <div class="chart-bar" id="bar-inspirational"><span class="bar-percentage" id="percent-inspirational"></span></div>
+                        <div class="bar-label">Inspirational</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.scrollTo(0, 0);
+    });
+</script>
+
+<script>
+    // --- Data for the Quiz ---
+    const questions = [
+        { q: '1. ถ้าต้องเริ่มโปรเจกต์ใหม่ คุณจะทำอะไรก่อน?', o: {a: 'ระดมสมองหาไอเดียให้ได้เยอะที่สุด', b: 'ลองคิดในมุมกลับว่า "ถ้าไม่ทำแบบเดิมจะทำอะไรได้บ้าง?"', c: 'จินตนาการถึง "ความรู้สึก" ของคนที่จะใช้ผลงานนี้', d: 'วิเคราะห์ภาพรวมทั้งหมดเพื่อหาจุดเริ่มต้นที่เหมาะสม', e: 'ตั้งเป้าหมายที่ชัดเจนและสร้างแรงบันดาลใจให้ทีม'} },
+        { q: '2. เมื่อเจอปัญหาที่แก้ไม่ตกซักที คุณจะทำอย่างไร?', o: { a: 'วาดแผนผังเพื่อดูว่าอะไรเชื่อมโยงกับอะไรบ้าง', b: 'นึกถึง "ประสบการณ์ที่ดีที่สุด" ที่อยากให้เกิดขึ้น', c: 'ตั้งคำถามแปลกๆ เพื่อท้าทายความคิดตัวเอง', d: 'ย้ำเตือนทีมถึงเป้าหมายที่ยิ่งใหญ่ร่วมกัน', e: 'ลิสต์วิธีแก้ปัญหาที่เป็นไปได้ทั้งหมดออกมา' } },
+        { q: '3. ตอนทำสไลด์เสนอผลงาน คุณให้ความสำคัญกับอะไรที่สุด?', o: { a: 'ความสวยงาม การจัดวาง และการเลือกใช้สี', b: 'โครงสร้างที่เข้าใจง่ายและเป็นระบบ', c: 'ข้อความหลักที่ทรงพลังและสร้างแรงบันดาลใจ', d: 'รูปแบบการนำเสนอที่ไม่เหมือนใคร', e: 'ลองจัดเรียงเนื้อหาหลายๆ แบบเพื่อหาทางเล่าเรื่องใหม่ๆ' } },
+        { q: '4. ถ้าโปรเจกต์เจอทางตันและทีมเริ่มท้อ คุณจะทำอย่างไร?', o: { a: 'ปลุกใจทีมด้วยการย้อนกลับไปที่เป้าหมายแรกเริ่ม', b: 'ชวนทีมคิดหาทางออกใหม่ๆ แบบไม่มีกรอบ', c: 'ชวนตั้งคำถามท้าทายข้อจำกัดที่เคยเชื่อ', d: 'วิเคราะห์ปัญหาทั้งหมดเพื่อหาต้นตอที่แท้จริง', e: 'ชวนทีมไปเปลี่ยนบรรยากาศเพื่อหาไอเดียใหม่' } },
+        { q: '5. เมื่อต้องเดินทางไปทำงานในที่ที่ไม่คุ้นเคย คุณจะเริ่มอย่างไร?', o: { a: 'ศึกษาแผนที่และข้อมูลทั้งหมดเพื่อให้เข้าใจภาพรวม', b: 'ลิสต์ทุกอย่างที่อาจต้องทำเผื่อไว้', c: 'ตั้งเป้าหมายว่าการเดินทางครั้งนี้จะสร้างโอกาสใหม่อะไรได้บ้าง', d: 'มองหาวิธีการทำงานหรือเส้นทางที่คนอื่นไม่ทำกัน', e: 'นึกถึง "บรรยากาศ" ที่อยากให้การเดินทางครั้งนี้เป็น' } },
+        { q: '6. ถ้าต้องปรับปรุงขั้นตอนการทำงานเก่าๆ คุณจะเริ่มจากอะไร?', o: {a: 'ตั้งคำถามเปลี่ยนมุมมอง เช่น "เราจำเป็นต้องทำขั้นตอนนี้อยู่ไหม?"', b: 'หาเครื่องมือและวิธีทำงานใหม่ๆ ให้ได้มากที่สุด', c: 'ออกแบบขั้นตอนใหม่ให้คนทำงานรู้สึกง่ายและราบรื่น', d: 'วิเคราะห์ว่าขั้นตอนนี้กระทบกับส่วนอื่นขององค์กรอย่างไร', e: 'สื่อสารให้ทีมเห็นว่าการปรับปรุงนี้จะช่วยให้เราบรรลุเป้าหมายใหญ่ได้อย่างไร'} },
+        { q: '7. ตอนเลือกของขวัญให้คนอื่น คุณคิดถึงอะไร?', o: { a: 'ของที่ช่วยสนับสนุนความฝันของเขา', b: 'คิดถึงของขวัญหลายๆ แบบ ตั้งแต่ของใช้ไปจนถึงประสบการณ์', c: 'วิเคราะห์ความต้องการและไลฟ์สไตล์ของเขา', d: 'หาของขวัญที่ "คาดไม่ถึง" แต่มีความหมาย', e: 'เลือกของที่ดูดีและสร้างความรู้สึกพิเศษ' } },
+        { q: '8. เมื่อต้องช่วยแก้ปัญหาให้เพื่อนที่ทะเลาะกัน คุณจะทำอย่างไร?', o: { a: 'พยายามทำความเข้าใจภาพรวมความสัมพันธ์ของทั้งสองคน', b: 'สร้างบรรยากาศสบายๆ ให้ทั้งสองฝ่ายเปิดใจ', c: 'ชวนทั้งสองคนนึกถึงภาพอนาคตที่ดีร่วมกัน', d: 'ให้แต่ละฝ่ายลองมองจากมุมของอีกคน', e: 'ช่วยกันคิดหาทางออกที่เป็นไปได้ทั้งหมด' } },
+        { q: '9. ตอนเขียนอีเมลอธิบายเรื่องยากๆ คุณจะเริ่มอย่างไร?', o: { a: 'ร่างทุกประเด็นที่เกี่ยวข้องออกมาก่อน', b: 'หา "ใจความหลัก" ที่อยากสื่อสารที่สุด', c: 'วางโครงสร้างอีเมลให้เป็นลำดับและเชื่อมโยงกัน', d: 'หาคำเปรียบเทียบง่ายๆ มาใช้อธิบาย', e: 'เลือกใช้คำและรูปแบบที่อ่านง่ายสบายตา' } },
+        { q: '10. ถ้าอยากปรับปรุง "วัฒนธรรมองค์กร" คุณจะเริ่มจากอะไร?', o: { a: 'สร้าง "ภาพฝันร่วมกัน" ว่าอยากให้องค์กรเป็นแบบไหน', b: 'เปิดรับฟังความคิดเห็นจากทุกคนให้ได้มากที่สุด', c: 'วิเคราะห์โครงสร้างและปัจจัยที่ส่งผลต่อวัฒนธรรมปัจจุบัน', d: 'ออกแบบออฟฟิศและสภาพแวดล้อมให้น่าทำงาน', e: 'ตั้งคำถามท้าทายกฎเกณฑ์เดิมๆ' } },
+        { q: '11. ถ้าต้องจัด Workshop คุณจะใส่ใจเรื่องอะไรที่สุด?', o: {a: 'กิจกรรมที่แปลกใหม่และกระตุ้นความคิด', b: 'ทำให้ทุกคนรู้สึกเป็นส่วนหนึ่งของเป้าหมายงาน', c: 'เตรียมกิจกรรมหลากหลายให้ทุกคนมีส่วนร่วม', d: 'ออกแบบบรรยากาศ สถานที่ และของว่างให้น่าประทับใจ', e: 'วางแผนลำดับกิจกรรมให้เชื่อมโยงกันและมีประโยชน์'} },
+        { q: '12. เวลาเรียนรู้ทักษะใหม่ๆ คุณมีแนวทางอย่างไร?', o: { a: 'มองว่าทักษะใหม่จะต่อยอดกับความรู้เดิมได้อย่างไร', b: 'หาวิธีเรียนที่สนุกและสร้างสรรค์สำหรับตัวเอง', c: 'ตั้งเป้าหมายที่สร้างแรงบันดาลใจในการเรียนรู้', d: 'ลองผิดลองถูกกับหลายๆ เทคนิคเพื่อหาวิธีที่ใช่', e: 'ทลายกรอบความคิดเดิมๆ เกี่ยวกับการเรียนรู้' } },
+        { q: '13. เมื่อรู้สึก "หมดไฟ" คุณจะทำอย่างไร?', o: { a: 'กลับไปทบทวน "เหตุผลแรก" ที่ทำให้เราเริ่มทำงานนี้', b: 'ลองเปลี่ยนวิธีการหรือสถานที่ทำงานไปเลย', c: 'จัดโต๊ะทำงานใหม่ให้สวยงามน่ามอง', d: 'คุยกับเพื่อนร่วมงานเพื่อหาไอเดียจัดการงานใหม่ๆ', e: 'วิเคราะห์ว่าความรู้สึกนี้เชื่อมโยงกับเรื่องอื่นอย่างไร' } },
+        { q: '14. คุณวัด "ความสำเร็จ" ของโครงการจากอะไร?', o: { a: '"ความรู้สึก" พอใจของคนที่เกี่ยวข้อง', b: 'จำนวนไอเดียใหม่ๆ ที่เกิดขึ้นจากโครงการ', c: 'เรื่องราวดีๆ ที่สร้างแรงบันดาลใจจากโครงการ', d: 'ผลกระทบต่อองค์กรในระยะยาว', e: 'ความเป็นไปได้ในการต่อยอดโครงการ' } },
+        { q: '15. ถ้าต้องทำวิดีโอสั้นๆ แนะนำองค์กร คุณจะเริ่มจากอะไร?', o: { a: 'หา "สาร" สำคัญที่อยากส่งให้ผู้ชม', b: 'ลองใช้เทคนิคการเล่าเรื่องหลายๆ แบบ', c: 'เขียนโครงเรื่องที่เชื่อมโยงภารกิจองค์กรเข้ากับภาพใหญ่', d: 'ออกแบบภาพและเสียงที่สร้างอารมณ์ร่วม', e: 'หาวิธีเล่าเรื่องที่แตกต่างจากคนอื่น' } },
+        { q: '16. เมื่อต้องตัดสินใจเรื่องสำคัญแต่มีทรัพยากรจำกัด คุณจะทำอย่างไร?', o: {a: 'เลือกทางที่ส่งผลดีต่อเป้าหมายใหญ่ที่สุด', b: 'เขียนทางเลือกที่เป็นไปได้ทั้งหมดออกมา', c: 'คุยกับคนนอกวงการเพื่อหามุมมองใหม่ๆ', d: 'วาดภาพผลกระทบที่จะเกิดกับทุกฝ่าย', e: 'เลือกทางที่ตัวเองรู้สึกว่า "ใช่" ที่สุด'} },
+        { q: '17. คุณมีวิธีอธิบายเรื่องยากๆ ให้คนอื่นเข้าใจง่ายๆ อย่างไร?', o: { a: 'เปรียบเทียบกับเรื่องใกล้ตัวที่ทุกคนรู้จัก', b: 'ใช้รูปภาพหรือ Infographic ที่สวยงาม', c: 'เล่าเป็นเรื่องราวที่น่าติดตาม', d: 'อธิบายว่าเรื่องนี้เชื่อมโยงกับภาพรวมอย่างไร', e: 'เสนอหลายๆ มุมมองเพื่อให้เห็นภาพกว้างขึ้น' } },
+        { q: '18. เมื่อเห็น "พื้นที่ว่าง" ที่ไม่ได้ใช้ประโยชน์ คุณคิดอะไร?', o: { a: '"พื้นที่นี้ทำอะไรได้อีกเยอะเลยนะ"', b: '"ถ้าเราใช้พื้นที่นี้ทำอะไรที่ไม่มีใครเคยทำล่ะ?"', c: '"พื้นที่นี้ควรเป็นหัวใจที่สร้างแรงบันดาลใจให้ทุกคน"', d: '"ถ้าปรับปรุงพื้นที่นี้ จะกระทบกับส่วนอื่นไหม?"', e: '"จะออกแบบพื้นที่นี้ให้สวยและน่านั่งได้อย่างไร?"' } },
+        { q: '19. คุณเลือกอ่านหนังสือพัฒนาตัวเองจากอะไร?', o: { a: 'ปกสวยและการออกแบบที่น่าสนใจ', b: 'เนื้อหาที่ท้าทายความคิดเดิมๆ', c: 'คำนิยมที่บอกว่าจะสร้างแรงบันดาลใจ', d: 'เนื้อหาที่ช่วยให้เข้าใจภาพรวมที่ซับซ้อน', e: 'เนื้อหาที่มีหลายแนวคิดให้เลือกปรับใช้' } },
+        { q: '20. "นวัตกรรม" ในความคิดของคุณคืออะไร?', o: { a: 'การสร้างสิ่งใหม่ๆ ที่เป็นไปได้หลากหลาย', b: 'การแก้ปัญหาด้วยมุมมองที่แตกต่าง', c: 'การสร้างสิ่งที่ตอบโจทย์ทางความรู้สึก', d: 'การเปลี่ยนแปลงที่ส่งผลกระทบในวงกว้าง', e: 'การทำให้เป้าหมายที่ยิ่งใหญ่เป็นจริง' } },
+        { q: '21. ตอนตั้งชื่อโครงการใหม่ คุณทำอย่างไร?', o: { a: 'ลิสต์ชื่อออกมาให้เยอะที่สุดก่อน', b: 'หาคำที่สะท้อนเรื่องราวของโครงการ', c: 'หาชื่อที่ฟังแล้ว "รู้สึกดี" และน่าจดจำ', d: 'ลองผสมคำที่ไม่เกี่ยวข้องกันเพื่อสร้างชื่อใหม่', e: 'คิดว่าชื่อจะสื่อถึงผลลัพธ์ระยะยาวได้อย่างไร' } },
+        { q: '22. เมื่อทีมมีความเห็นเรื่อง "โลโก้" ไม่ตรงกัน คุณจะทำอย่างไร?', o: { a: 'นำแบบทั้งหมดไปทดสอบ "ความรู้สึก" กับกลุ่มเป้าหมาย', b: 'ให้แต่ละคนเล่าว่าโลโก้ของตนสะท้อน "เป้าหมายใหญ่" ของแบรนด์อย่างไร', c: 'วิเคราะห์ว่าแต่ละแบบส่งผลต่อภาพลักษณ์โดยรวมอย่างไร', d: 'ลองนำข้อดีของแต่ละแบบมารวมกัน', e: 'ตั้งคำถามว่า "ถ้าเราไม่ใช้โลโก้เลยล่ะ?"' } },
+        { q: '23. การวางแผนประชุมที่ดีควรเริ่มจากอะไร?', o: { a: 'เป้าหมายที่สร้างแรงบันดาลใจของการประชุม', b: 'ใครควรเข้าร่วมบ้าง และจะส่งผลอย่างไร', c: 'จะสร้าง "บรรยากาศ" ที่ดีได้อย่างไร', d: 'ลองจัดประชุมในรูปแบบที่แตกต่างไปเลยดีไหม', e: 'มีเรื่องอะไรบ้างที่คุยได้ ลิสต์ออกมาทั้งหมด' } },
+        { q: '24. ถ้าต้องจัด Team Building คุณจะเลือกกิจกรรมแบบไหน?', o: { a: 'กิจกรรมแก้ปัญหาที่ต้องคิดนอกกรอบ', b: 'กิจกรรมสร้างสรรค์ที่สวยงาม เช่น วาดภาพ', c: 'กิจกรรมหลากหลายให้ทุกคนได้โชว์ความสามารถ', d: 'กิจกรรมที่สะท้อนเป้าหมายขององค์กร', e: 'กิจกรรมที่ทำให้ทุกคนเข้าใจหน้าที่ของกันและกัน' } },
+        { q: '25. ตอนเลือกเฟอร์นิเจอร์เข้าออฟฟิศ คุณเน้นอะไร?', o: { a: 'ดีไซน์ที่สวยงามและเข้ากับภาพลักษณ์องค์กร', b: 'ความยืดหยุ่นที่ปรับเปลี่ยนการใช้งานได้หลากหลาย', c: 'การจัดวางที่ส่งเสริมการทำงานร่วมกัน', d: 'ดีไซน์ที่กระตุ้นความคิดใหม่ๆ ที่ไม่คาดคิด', e: 'เฟอร์นิเจอร์ที่บอกเล่าเรื่องราวของบริษัท' } },
+        { q: '26. ถ้าต้องปรับปรุง "หน้าแรก" ของเว็บไซต์ คุณจะทำอะไรก่อน?', o: { a: 'วิเคราะห์เส้นทางของผู้ใช้งานทั้งหมด', b: 'คิดว่ามีข้อมูลอะไรที่ใส่ลงไปได้บ้าง', c: 'กำหนด "อารมณ์และโทนสี" ที่ต้องการ', d: 'กำหนด "สิ่งสำคัญที่สุด" ที่อยากให้คนจำได้', e: 'ถามตัวเองว่า "ถ้าหน้าแรกไม่เป็นเว็บ จะเป็นอะไร?"' } },
+        { q: '27. ถ้าต้อง "ลดค่าใช้จ่าย" คุณจะทำอย่างไร?', o: { a: 'ระดมสมองหาวิธีลดในทุกๆ ด้าน', b: 'ท้าทายว่า "ถ้าไม่มีสิ่งนี้เลย จะเป็นอย่างไร?"', c: 'วิเคราะห์ภาพรวมเพื่อหาจุดที่ลดได้อย่างมีประสิทธิภาพ', d: 'สื่อสารถึงเป้าหมายใหญ่ว่าทำไมเราต้องลด', e: 'ออกแบบกระบวนการลดค่าใช้จ่ายให้เหมือนการเล่นเกม' } },
+        { q: '28. คุณจะอธิบายเรื่อง "ความยั่งยืน" ให้เด็กฟังอย่างไร?', o: { a: 'เล่านิทานที่สร้างแรงบันดาลใจ', b: 'เปรียบเทียบกับเรื่องง่ายๆ ใกล้ตัว', c: 'วาดภาพที่ทำให้เกิดความรู้สึกอยากปกป้อง', d: 'แสดงให้เห็นว่าการกระทำเล็กๆ เชื่อมโยงกับโลกอย่างไร', e: 'ชวนคิดว่าจะประดิษฐ์อะไรจากของเหลือใช้ได้บ้าง' } },
+        { q: '29. ตอนสร้าง "กฎ" ของทีม คุณจะทำอย่างไร?', o: { a: 'ให้ทุกคนเสนอ "กฎในฝัน" ของตัวเอง', b: 'ตั้งกฎที่ท้าทายวิธีการทำงานแบบเดิม', c: 'ออกแบบกฎที่ใช้ภาษาที่สร้างความรู้สึกที่ดี', d: 'สร้างกฎที่สะท้อน "เป้าหมายร่วมกัน" ของทีม', e: 'พิจารณาว่ากฎแต่ละข้อจะส่งผลต่อภาพรวมอย่างไร' } },
+        { q: '30. คุณจะนำเสนอ "ตัวเลข" ที่น่าเบื่อให้น่าสนใจได้อย่างไร?', o: { a: 'ทำเป็นภาพ Infographic ที่สวยงาม', b: 'เล่าเรื่องโดยใช้ตัวเลขเป็นจุดสำคัญ', c: 'เปรียบเทียบกับสิ่งที่คาดไม่ถึง', d: 'แสดงให้เห็นว่าตัวเลขเชื่อมโยงกับเป้าหมายใหญ่อย่างไร', e: 'คิดหาวิธีนำเสนอในรูปแบบอื่นๆ ที่เป็นไปได้' } },
+    ];
+    const answerKey = {
+        q1: { a: 'divergent', b: 'lateral', c: 'aesthetic', d: 'systematic', e: 'inspirational' }, q2: { a: 'systematic', b: 'aesthetic', c: 'lateral', d: 'inspirational', e: 'divergent' }, q3: { a: 'aesthetic', b: 'systematic', c: 'inspirational', d: 'lateral', e: 'divergent' }, q4: { a: 'inspirational', b: 'divergent', c: 'lateral', d: 'systematic', e: 'aesthetic' }, q5: { a: 'systematic', b: 'divergent', c: 'inspirational', d: 'lateral', e: 'aesthetic' }, q6: { a: 'lateral', b: 'divergent', c: 'aesthetic', d: 'systematic', e: 'inspirational' }, q7: { a: 'inspirational', b: 'divergent', c: 'systematic', d: 'lateral', e: 'aesthetic' }, q8: { a: 'systematic', b: 'aesthetic', c: 'inspirational', d: 'lateral', e: 'divergent' }, q9: { a: 'divergent', b: 'inspirational', c: 'systematic', d: 'lateral', e: 'aesthetic' }, q10: { a: 'inspirational', b: 'divergent', c: 'systematic', d: 'aesthetic', e: 'lateral' }, q11: { a: 'lateral', b: 'inspirational', c: 'divergent', d: 'aesthetic', e: 'systematic' }, q12: { a: 'systematic', b: 'aesthetic', c: 'inspirational', d: 'divergent', e: 'lateral' }, q13: { a: 'inspirational', b: 'lateral', c: 'aesthetic', d: 'divergent', e: 'systematic' }, q14: { a: 'aesthetic', b: 'divergent', c: 'inspirational', d: 'systematic', e: 'divergent' }, q15: { a: 'inspirational', b: 'divergent', c: 'systematic', d: 'aesthetic', e: 'lateral' }, q16: { a: 'inspirational', b: 'divergent', c: 'lateral', d: 'systematic', e: 'aesthetic' }, q17: { a: 'lateral', b: 'aesthetic', c: 'inspirational', d: 'systematic', e: 'divergent' }, q18: { a: 'divergent', b: 'lateral', c: 'inspirational', d: 'systematic', e: 'aesthetic' }, q19: { a: 'aesthetic', b: 'lateral', c: 'inspirational', d: 'systematic', e: 'divergent' }, q20: { a: 'divergent', b: 'lateral', c: 'aesthetic', d: 'systematic', e: 'inspirational' }, q21: { a: 'divergent', b: 'inspirational', c: 'aesthetic', d: 'lateral', e: 'systematic' }, q22: { a: 'aesthetic', b: 'inspirational', c: 'systematic', d: 'divergent', e: 'lateral' }, q23: { a: 'inspirational', b: 'systematic', c: 'aesthetic', d: 'lateral', e: 'divergent' }, q24: { a: 'lateral', b: 'aesthetic', c: 'divergent', d: 'inspirational', e: 'systematic' }, q25: { a: 'aesthetic', b: 'divergent', c: 'systematic', d: 'lateral', e: 'inspirational' }, q26: { a: 'systematic', b: 'divergent', c: 'aesthetic', d: 'inspirational', e: 'lateral' }, q27: { a: 'divergent', b: 'lateral', c: 'systematic', d: 'inspirational', e: 'aesthetic' }, q28: { a: 'inspirational', b: 'lateral', c: 'aesthetic', d: 'systematic', e: 'divergent' }, q29: { a: 'divergent', b: 'lateral', c: 'aesthetic', d: 'inspirational', e: 'systematic' }, q30: { a: 'aesthetic', b: 'inspirational', c: 'lateral', d: 'systematic', e: 'divergent' },
+    };
+
+    // --- DOM Elements ---
+    const coverPage = document.getElementById('cover-page');
+    const quizPage = document.getElementById('quiz-page');
+    const startQuizBtn = document.getElementById('start-quiz-btn');
+    const quizForm = document.getElementById('quiz-form');
+    const resultsContainer = document.getElementById('results-container');
+    
+    // --- State Variables ---
+    const questionsPerPage = 1; 
+    const totalPages = Math.ceil(questions.length / questionsPerPage);
+    let currentPage = 1;
+
+    // --- Functions ---
+    function startQuiz() {
+        coverPage.style.display = 'none';
+        quizPage.style.display = 'block';
+        quizPage.style.animation = 'fadeIn 1s ease-in-out';
+        window.scrollTo(0, 0); 
+    }
+
+    function renderQuiz() {
+        let html = '';
+        for (let i = 0; i < totalPages; i++) {
+            const pageNum = i + 1;
+            const isActive = pageNum === 1 ? 'active' : '';
+            html += `<div class="quiz-page-view ${isActive}" id="page-${pageNum}">`;
+            
+            html += `<div class="progress-text">ข้อที่ ${pageNum} จาก ${totalPages}</div>`;
+
+            const start = i * questionsPerPage;
+            const end = start + questionsPerPage;
+            const pageQuestions = questions.slice(start, end);
+
+            pageQuestions.forEach((qData, index) => {
+                const qNum = start + index + 1;
+                let optionsHTML = '';
+                for(const key in qData.o) {
+                    optionsHTML += `
+                        <div class="option">
+                            <input type="radio" id="q${qNum}${key}" name="q${qNum}" value="${key}">
+                            <label for="q${qNum}${key}">${key.toUpperCase()}. ${qData.o[key]}</label>
+                        </div>`;
+                }
+                html += `<div class="question-block"><h3>${qData.q}</h3>${optionsHTML}</div>`;
+            });
+            html += `</div>`;
+        }
+        
+        html += `
+            <div class="navigation-buttons">
+                <button type="button" id="prev-btn" class="nav-btn">ย้อนกลับ</button>
+                <button type="button" id="next-btn" class="nav-btn">ถัดไป</button>
+                <button type="submit" id="submit-btn" class="nav-btn" style="display: none;">ดูผลลัพธ์</button>
+            </div>
+            <p id="validation-message">กรุณาเลือกคำตอบก่อนไปข้อถัดไป</p>`;
+        
+        quizForm.innerHTML = html;
+        addNavListeners();
+        showPage(1);
+    }
+
+    function addNavListeners() {
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        nextBtn.addEventListener('click', () => {
+            if (isPageAnswered(currentPage)) {
+                document.getElementById('validation-message').style.display = 'none';
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    showPage(currentPage);
+                }
+            } else {
+                 document.getElementById('validation-message').style.display = 'block';
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                document.getElementById('validation-message').style.display = 'none';
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+        
+        quizForm.addEventListener('submit', handleFormSubmit);
+    }
+
+    function showPage(pageNumber) {
+        document.querySelectorAll('.quiz-page-view').forEach(page => page.classList.remove('active'));
+        document.getElementById(`page-${pageNumber}`).classList.add('active');
+        updateNavButtons();
+        window.scrollTo(0, 0); 
+    }
+    
+    function updateNavButtons() {
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        prevBtn.style.visibility = currentPage === 1 ? 'hidden' : 'visible'; // Use visibility to maintain layout
+        nextBtn.style.display = currentPage === totalPages ? 'none' : 'inline-block';
+        submitBtn.style.display = currentPage === totalPages ? 'inline-block' : 'none';
+    }
+
+    function isPageAnswered(pageNumber) {
+        const start = (pageNumber - 1) * questionsPerPage;
+        for (let i = 0; i < questionsPerPage; i++) {
+            const qIndex = start + i + 1;
+            if (qIndex > questions.length) break;
+            const selected = document.querySelector(`input[name="q${qIndex}"]:checked`);
+            if (!selected) return false;
+        }
+        return true;
+    }
+    
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        if (!isPageAnswered(currentPage)) {
+            document.getElementById('validation-message').style.display = 'block';
+            return;
+        }
+        
+        const scores = { divergent: 0, lateral: 0, aesthetic: 0, systematic: 0, inspirational: 0 };
+        const totalQuestions = questions.length;
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selectedOption) {
+                const qKey = `q${i}`;
+                const answerValue = selectedOption.value;
+                const type = answerKey[qKey][answerValue];
+                if (type) scores[type]++;
+            }
+        }
+        showResults(scores);
+    }
+
+    function showResults(scores) {
+        document.querySelector('.navigation-buttons').style.display = 'none';
+        document.getElementById('validation-message').style.display = 'none';
+        
+        quizForm.style.display = 'none';
+        
+        resultsContainer.style.display = 'block';
+        
+        const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+
+        for (const type in scores) {
+            const score = scores[type];
+            const percentage = totalScore === 0 ? 0 : Math.round((score / totalScore) * 100);
+            
+            const maxHeight = 280;
+            const barHeight = (percentage / 100) * maxHeight;
+
+            document.getElementById(`score-${type}`).textContent = score;
+            document.getElementById(`percent-${type}`).textContent = `${percentage}%`;
+            document.getElementById(`bar-${type}`).style.height = `${barHeight}px`;
+        }
+        
+        resultsContainer.classList.add('show-results');
+        window.scrollTo(0, 0);
+    }
+
+    // --- Initial Setup ---
+    startQuizBtn.addEventListener('click', startQuiz);
+    renderQuiz();
+</script>
+
+</body>
+</html>
